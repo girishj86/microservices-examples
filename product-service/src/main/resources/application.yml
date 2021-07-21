@@ -1,0 +1,17 @@
+server:
+    port: 8200
+    ports: 8201,8202
+spring:
+    application:
+        name: product-service
+
+eureka:
+    client:
+        fetch-registry: true
+        register-with-eureka: true
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+    instance:
+        hostname: localhost
+        prefer-ip-address: true
+

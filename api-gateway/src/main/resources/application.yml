@@ -1,0 +1,35 @@
+server:
+    port: 8080
+spring:
+    application:
+        name: api-gateway
+
+eureka:
+    client:
+        service-url:
+            default-zone: http://localhost:8761/eureka/
+        fetch-registry: true
+        register-with-eureka: true
+    instance:
+        hostname: localhost 
+        prefer-ip-address: true   
+
+zuul:
+    ignored-services: '*'
+    routes:
+        auth-service:
+            path: /auth/**
+            sensitive-headers: 'Cookie,Set-Cookie '
+            service-id: auth-service
+            strip-prefix: false
+        order-service:
+            path: /order/**
+            service-id: order-service
+            strip-prefix: false
+        product-service:
+            path: /product/**
+            service-id: PRODUCT-SERVICE
+            strip-prefix: false
+            
+ribbon:
+  NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
